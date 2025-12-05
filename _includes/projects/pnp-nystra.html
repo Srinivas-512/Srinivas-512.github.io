@@ -1,0 +1,80 @@
+{% include base_path %}
+
+<div id="pnp-nystra" class="project-content">
+  <div class="project-header">
+    <!-- <h2>PnP-Nyström: Plug-and-Play Linear Attention</h2> -->
+    <!-- <div class="project-meta">Academic Research Project | arXiv Preprint</div> -->
+  </div>
+  
+  <div class="project-description">
+    <h3>Overview</h3>
+    <p>
+      We introduce <strong>PnP-Nystra</strong>, a Nyström-based linear approximation of self-attention
+      that acts as a <em>plug-and-play</em> module for image and video restoration transformers.
+      It replaces MHSA at inference time without any retraining, enabling fast and efficient deployment
+      in pre-trained models.
+    </p>
+
+    <h3>Project Objectives</h3>
+    <ul>
+      <li>Develop an efficient linear approximation of self-attention.</li>
+      <li>Design a drop-in module compatible with existing transformer architectures.</li>
+      <li>Achieve substantial GPU/CPU acceleration with minimal accuracy loss.</li>
+      <li>Validate performance on diverse image &amp; video restoration tasks.</li>
+    </ul>
+
+    <h3>Methodology</h3>
+    <p>The project employed:</p>
+    <ul>
+      <li><strong>Nyström Approximation:</strong> Landmark-based linear approximation of attention kernels.</li>
+      <li><strong>Architecture Integration:</strong> Drop-in replacement for MHSA in SwinIR, Uformer, RVRT.</li>
+      <li><strong>Evaluation:</strong> Denoising, deblurring, super-resolution, video SR.</li>
+      <li><strong>Performance Analysis:</strong> Speed, memory, and PSNR/SSIM comparisons.</li>
+    </ul>
+
+    <h3>Key Contributions</h3>
+    <ul>
+      <li>Novel Nyström-based linear attention formulation for self-attention approximation.</li>
+      <li>Training-free drop-in module compatible with SwinIR, Uformer-B, RVRT.</li>
+      <li>Achieved <strong>2–4× GPU</strong> and <strong>2–5× CPU</strong> speed-up over MHSA.</li>
+      <li>Maximum PSNR reduction of only <strong>1.5 dB</strong> across all tasks.</li>
+      <li>Validated on denoising, deblurring, super-resolution, and video restoration.</li>
+    </ul>
+
+    <h3>Technical Approach</h3>
+    <p>Implementation summary:</p>
+    <ul>
+      <li><strong>Generalized Nyström Method:</strong> Provable low-rank kernel approximation.</li>
+      <li><strong>Linear Complexity:</strong> Reduces MHSA's O(N²) operations to O(Nm).</li>
+      <li><strong>Compatibility:</strong> No fine-tuning required; preserves original weights.</li>
+      <li><strong>Optimized Pseudoinverse:</strong> Stable iterative solver for landmark matrices.</li>
+    </ul>
+
+    <h3>Results &amp; Impact</h3>
+    <p>The project achieved:</p>
+    <ul>
+      <li><strong>2–4× speed-up</strong> on NVIDIA RTX 4090.</li>
+      <li><strong>2–5× speed-up</strong> on CPU inference.</li>
+      <li><strong>≤1.5 dB</strong> PSNR drop across all evaluated tasks.</li>
+      <li>Published as an <em>arXiv preprint</em>.</li>
+    </ul>
+
+    <h3>Technologies &amp; Tools</h3>
+    <p><strong>Technologies:</strong> Deep Learning, Computer Vision, Transformers, Linear Attention, Image/Video Restoration</p>
+    <p><strong>Tools:</strong> PyTorch, CUDA, Python, Image Processing Libraries</p>
+
+    <div class="highlight-box">
+      <p>
+        <strong>Publication:</strong>
+        Kidambi, S., &amp; Nair, P. (2025).
+        <em>Plug-and-Play Linear Attention for Pre-trained Image and Video Restoration Models.</em>
+        arXiv:2506.08520.
+      </p>
+    </div>
+  </div>
+  
+  <div class="project-links">
+    <a href="/files/pnp-nystra.pdf" target="_blank">View Paper (PDF)</a>
+    <a href="https://arxiv.org/abs/2506.08520" target="_blank">arXiv Link</a>
+  </div>
+</div>

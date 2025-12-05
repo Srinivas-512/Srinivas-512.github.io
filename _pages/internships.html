@@ -1,0 +1,40 @@
+---
+layout: single
+title: "Internships"
+permalink: /internships/
+author_profile: true
+---
+
+{% include base_path %}
+{% include project-styles.html %}
+
+<style>
+  /* Hide all project content by default */
+  .project-content-wrapper .project-content {
+    display: none;
+  }
+  
+  /* Show content when corresponding tab is checked */
+  #tab-cummins:checked ~ .project-content-wrapper #cummins {
+    display: block;
+  }
+  
+  #tab-infernet:checked ~ .project-content-wrapper #infernet {
+    display: block;
+  }
+</style>
+
+<div class="project-tabs-container">
+  <input type="radio" id="tab-cummins" name="project-tabs" class="project-tab-input" checked>
+  <input type="radio" id="tab-infernet" name="project-tabs" class="project-tab-input">
+  
+  <div class="project-tabs">
+    <label for="tab-cummins" class="project-tab-label">Cummins</label>
+    <label for="tab-infernet" class="project-tab-label">Skan AI</label>
+  </div>
+  
+  <div class="project-content-wrapper">
+    {% include projects/cummins.html %}
+    {% include projects/infernet.html %}
+  </div>
+</div>

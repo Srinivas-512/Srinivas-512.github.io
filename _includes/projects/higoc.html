@@ -1,0 +1,86 @@
+{% include base_path %}
+
+<div id="higoc" class="project-content">
+  <div class="project-header">
+    <!-- <h2>Hierarchical Offline RL — HiGOC Framework & Improvements</h2> -->
+    <!-- <div class="project-meta">Course Project — DA7400</div> -->
+  </div>
+  
+  <div class="project-description">
+    <h3>Overview</h3>
+    <p>
+      This project implements and extends the <strong>HiGOC (Hierarchical Goal-Conditioned Offline Control)</strong> 
+      framework described in the paper “Hierarchical Planning Through Goal-Conditioned Reinforcement Learning”. 
+      The work focuses on offline RL for long-horizon navigation tasks, addressing issues such as distributional 
+      shift, out-of-distribution (OOD) goals, and unstable high-level planning. 
+      The full technical methodology appears in the final report.
+    </p>
+
+    <h3>Project Objectives</h3>
+    <ul>
+      <li>Implement the complete HiGOC framework — CVAE, low-level offline RL agent, and high-level planner.</li>
+      <li>Evaluate low-level agents (IQL and TD3+BC) and assess how hierarchical planning enhances them.</li>
+      <li>Address subgoal clustering and slow inference by proposing an improved <strong>Distance-HiGOC</strong> planner.</li>
+      <li>Validate improvements on Antmaze environments (U-maze and U-maze diverse variants).</li>
+    </ul>
+
+    <h3>Methodology</h3>
+    <p>
+      The pipeline consists of a <strong>Conditional VAE</strong> that models subgoal transitions in latent space, 
+      a <strong>low-level goal-conditioned agent</strong> (trained using IQL or TD3+BC), and a 
+      <strong>high-level Cross-Entropy Method (CEM) planner</strong> that proposes sequences of latent subgoals. 
+      To stabilize learning:
+    </p>
+    <ul>
+      <li><strong>Reward relabeling (TDM-style)</strong> penalizes unreachable goals.</li>
+      <li><strong>Noisy subgoal sampling</strong> ensures the value function learns low values for OOD states.</li>
+      <li><strong>CVAE training</strong> captures the latent transition structure needed for planning.</li>
+      <li><strong>CEM optimization</strong> finds subgoal sequences maximizing cumulative value and latent likelihood.</li>
+    </ul>
+    <p>
+      The improved <strong>Distance-HiGOC</strong> version adds a distance-based incentive, encouraging
+      subgoals to be spatially spread rather than clustered near the final goal.
+    </p>
+
+    <h3>Results & Impact</h3>
+    <p>
+      Experiments on Antmaze U-maze and U-maze diverse environments (using D4RL datasets) show:
+    </p>
+    <ul>
+      <li>IQL baseline: <strong>87.5</strong> (U-maze) and <strong>62.2</strong> (U-maze diverse).</li>
+      <li>HiGOC-IQL improved performance to <strong>88</strong> and <strong>72</strong>, respectively.</li>
+      <li>TD3+BC: <strong>78.6</strong> → <strong>88</strong> (HiGOC version), and <strong>71.4</strong> → <strong>80</strong> on diverse tasks.</li>
+      <li>Distance-HiGOC drastically reduced inference time (180s → 15s per episode) while slightly improving score.</li>
+    </ul>
+    <p>
+      The results show that hierarchical planning significantly improves low-level agents, even those that
+      underperform individually (e.g., IQL on diverse mazes).
+    </p>
+
+    <h3>Key Contributions</h3>
+    <ol>
+      <li>Implemented a complete HiGOC pipeline from scratch, including CVAE latent modeling and CEM-based planning.</li>
+      <li>Analyzed the influence of low-level agent choice on hierarchical RL performance.</li>
+      <li>Introduced <strong>Distance-HiGOC</strong>, a faster and more spatially balanced planner for sparse-reward navigation.</li>
+      <li>Provided reproducible evaluation across multiple seeds and environments.</li>
+    </ol>
+
+    <h3>Technologies & Tools</h3>
+    <p>
+      The implementation uses offline RL algorithms (IQL, TD3+BC), CVAEs, the Antmaze environments from D4RL,
+      and full custom code for the HiGOC high-level planner. Training curves, path trajectories, and 
+      subgoal-distribution plots are available in the report.
+    </p>
+
+    <h3>Acknowledgments</h3>
+    <p>
+      The project was part of the DA7400 course at IIT Madras and was guided by the course instructors 
+      and TAs. Special credit is given to Prof. B. Ravindran and research mentors for support during 
+      implementation and debugging. Full report and figures are available in the provided PDF.
+    </p>
+  </div>
+  
+  <div class="project-links">
+    <a href="/files/HiGOC_modification_report.pdf" target="_blank">View Project Report (PDF)</a>
+  </div>
+</div>

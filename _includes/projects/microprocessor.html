@@ -1,0 +1,59 @@
+{% include base_path %}
+
+<div id="microprocessor" class="project-content">
+  <div class="project-header">
+    <!-- <h2>Microprocessor Hippocampal Project</h2> -->
+    <!-- <div class="project-meta">Research Project</div> -->
+  </div>
+  
+  <div class="project-description">
+    <h3>Overview</h3>
+    <p>
+      A research effort that explores analogies between hippocampal recurrent architectures and
+      microprocessor modelling. The project develops datasets (stack-style and a small ISA),
+      proposes recurrent/seq2seq/attention-based solutions, and evaluates their capacity to
+      reproduce microprocessor-like behaviors.
+    </p>
+
+    <h3>Project Objectives</h3>
+    <ul>
+      <li>Design neuromorphic/hippocampus-inspired architectures to model sequential microprocessor behaviour.</li>
+      <li>Construct datasets (stack dataset & microprocessor ISA) to benchmark sequence learning models.</li>
+      <li>Evaluate RNN/encoder-decoder/attention approaches and identify failure modes for complex instruction sequences.</li>
+    </ul>
+
+    <h3>Methodology</h3>
+    <p>
+      The work explores progressively richer sequence models:
+    </p>
+    <ul>
+      <li>Flip-Flop (FF) recurrent cells and small hippocampal-style RNNs for bitwise stack prediction.</li>
+      <li>Encoder–decoder architectures (FF & LSTM variants) and attention mechanisms to perform sequence-to-sequence mapping.</li>
+      <li>Two dataset families: a Stack dataset (no addressing) and an ISA-style microprocessor dataset (load/store + ALU ops).</li>
+    </ul>
+
+    <h3>Key Results & Impact</h3>
+    <ul>
+      <li>Attention-based encoder–decoder with LSTMs solved the stack problem well (≈85% accuracy for store length 8, and reliably on sequences up to length ~20).</li>
+      <li>Simpler FF RNNs lacked capacity for larger or more complex tasks; some FF variants stalled or had unstable convergence.</li>
+      <li>The microprocessor (ISA) dataset was significantly harder — attention/LSTM models struggled to converge for the full ISA experiments, pointing to encoding or capacity limitations and motivating Recurrent Memory Transformer exploration in future work.</li>
+    </ul>
+
+    <h3>Key Contributions</h3>
+    <ol>
+      <li>Design and release of structured microprocessor-style datasets (stack + ISA) for sequence modelling experiments.</li>
+      <li>Evaluation of hippocampal-inspired FF cells vs LSTM/attention models, with empirical results and failure analysis.</li>
+      <li>Recommendations for future directions (alternate encodings, Recurrent Memory Transformers, attention analysis).</li>
+    </ol>
+
+    <h3>Technologies & Tools</h3>
+    <p>
+      Neuromorphic computing concepts, recurrent neural networks (Flip-Flop / LSTM), encoder-decoder
+      seq2seq with attention, dataset generation scripts, and reproducible code for model experiments.
+    </p>
+  </div>
+  
+  <div class="project-links">
+    <a href="/files/microprocessor-hippocampal.pdf" target="_blank">View Project Report (PDF)</a>
+  </div>
+</div>

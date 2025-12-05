@@ -1,0 +1,47 @@
+---
+layout: single
+title: "Academic Research"
+permalink: /academic-research/
+author_profile: true
+---
+
+{% include base_path %}
+{% include project-styles.html %}
+
+<style>
+  /* Hide all project content by default */
+  .project-content-wrapper .project-content {
+    display: none;
+  }
+  
+  /* Show content when corresponding tab is checked */
+  #tab-irs:checked ~ .project-content-wrapper #irs {
+    display: block;
+  }
+  
+  #tab-microprocessor:checked ~ .project-content-wrapper #microprocessor {
+    display: block;
+  }
+  
+  #tab-pnp-nystra:checked ~ .project-content-wrapper #pnp-nystra {
+    display: block;
+  }
+</style>
+
+<div class="project-tabs-container">
+  <input type="radio" id="tab-irs" name="project-tabs" class="project-tab-input" checked>
+  <input type="radio" id="tab-microprocessor" name="project-tabs" class="project-tab-input">
+  <input type="radio" id="tab-pnp-nystra" name="project-tabs" class="project-tab-input">
+  
+  <div class="project-tabs">
+    <label for="tab-irs" class="project-tab-label">IRS Project</label>
+    <label for="tab-microprocessor" class="project-tab-label">Microprocessor Hippocampal</label>
+    <label for="tab-pnp-nystra" class="project-tab-label">PnP-Nyström</label>
+  </div>
+  
+  <div class="project-content-wrapper">
+    {% include projects/irs.html %}
+    {% include projects/microprocessor.html %}
+    {% include projects/pnp-nystra.html %}
+  </div>
+</div>

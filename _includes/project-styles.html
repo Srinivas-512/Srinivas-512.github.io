@@ -1,0 +1,185 @@
+<!--
+  PROJECT PAGE STYLES
+  ===================
+  Shared styles for all project pages
+-->
+<style>
+  .project-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 2px solid var(--global-border-color);
+    margin-bottom: 2rem;
+  }
+  
+  .project-tab-input {
+    display: none;
+  }
+  
+  .project-tab-label {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--global-text-color);
+    transition: all 0.3s ease;
+    margin-right: 0.5rem;
+    display: inline-block;
+  }
+  
+  .project-tab-label:hover {
+    color: var(--global-link-color);
+    background: var(--global-code-background-color);
+  }
+  
+  .project-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  /* Style active tab label when corresponding radio is checked */
+  #tab-cummins:checked ~ .project-tabs label[for="tab-cummins"],
+  #tab-infernet:checked ~ .project-tabs label[for="tab-infernet"],
+  #tab-irs:checked ~ .project-tabs label[for="tab-irs"],
+  #tab-microprocessor:checked ~ .project-tabs label[for="tab-microprocessor"],
+  #tab-pnp-nystra:checked ~ .project-tabs label[for="tab-pnp-nystra"] {
+    color: var(--global-link-color);
+    border-bottom-color: var(--global-link-color);
+    font-weight: 600;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .project-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .project-header h2 {
+    margin-bottom: 0.5rem;
+    color: var(--global-text-color);
+  }
+  
+  .project-meta {
+    color: var(--global-text-color-light);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .project-description {
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  
+  .project-description h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--global-text-color);
+    font-size: 1.3rem;
+    border-bottom: 2px solid var(--global-border-color);
+    padding-bottom: 0.5rem;
+  }
+  
+  .project-description h3:first-of-type {
+    margin-top: 0;
+  }
+  
+  .project-description img {
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+    border: 1px solid var(--global-border-color);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .diagram-container {
+    margin: 2rem 0;
+    text-align: center;
+  }
+  
+  .diagram-container img {
+    width: 800px;
+    max-width: 100%;
+    height: 600px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  @media (max-width: 900px) {
+    .diagram-container img {
+      width: 100%;
+      height: auto;
+      max-height: 600px;
+      object-fit: contain;
+    }
+  }
+  
+  .diagram-caption {
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: var(--global-text-color-light);
+    font-size: 0.9rem;
+  }
+  
+  .highlight-box {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: var(--global-code-background-color);
+    border-left: 4px solid var(--global-link-color);
+    border-radius: 4px;
+  }
+  
+  .project-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    border: 1px solid var(--global-border-color);
+  }
+  
+  .project-table th,
+  .project-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid var(--global-border-color);
+  }
+  
+  .project-table thead {
+    background: var(--global-code-background-color);
+  }
+  
+  .project-table th {
+    font-weight: 600;
+    color: var(--global-text-color);
+  }
+  
+  .project-table tbody tr:nth-child(even) {
+    background: var(--global-code-background-color);
+  }
+  
+  .project-links {
+    margin-top: 1.5rem;
+  }
+  
+  .project-links a {
+    display: inline-block;
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--global-link-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+  
+  .project-links a:hover {
+    background: var(--global-link-color-hover);
+  }
+</style>
+

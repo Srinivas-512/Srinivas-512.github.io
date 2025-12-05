@@ -2,26 +2,33 @@
    DARK THEME
    ========================================================================== */
 
+/* Custom Color Scheme */
+$navy                      : #0A1A2F;
+$white                     : #FFFFFF;
+$gold                      : #D4A017;
+$gold-light                : #F2C94C;
+$light-gray                : #F5F7FA;
+
 /* Color codes used for the theme */
 $gray                       : #7a8288;
-$dark-gray                  : mix(#000, $gray, 40%);
-$darker-gray                : mix(#000, $gray, 60%);
-$light-gray                 : mix(#fff, $gray, 50%);
+$dark-gray                  : mix($navy, #000, 80%);
+$darker-gray                : mix(#000, $navy, 10%);
+$light-gray-text            : mix($white, $navy, 70%);
 
-$background                 : #474747;
-$background-light           : mix(#fff, $background, 80%);
-$background-lighter         : mix(#fff, $background, 90%);
-$text                       : #ffffff;
-$link                       : #0ea1c5;
-$link-dark                  : mix(#000, $link, 25%);
-$link-light                 : mix(#fff, $link, 25%);
+$background                 : $navy;
+$background-light           : mix($white, $background, 10%);
+$background-lighter         : mix($white, $background, 15%);
+$text                       : $white;
+$link                       : $gold;
+$link-dark                  : mix($navy, $link, 30%);
+$link-light                 : mix($gold-light, $white, 50%);
 
 /* Color codes used for the site */
-$danger-color               : #ee5f5b;
-$info-color                 : #2f7f93;
-$notice-color               : #7a8288;
-$success-color              : #62c462;
-$warning-color              : #f89406;
+$danger-color               : #d62828;
+$info-color                 : mix($navy, #2f7f93, 60%);
+$notice-color               : $gold;
+$success-color              : mix($gold, #62c462, 50%);
+$warning-color              : mix($gold-light, #f77f00, 60%);
 
 /* Other basic settings for the template */
 $border-radius              : 4px;
@@ -37,18 +44,18 @@ $sidebar-screen-min-width   : 1024px;
 html[data-theme="dark"] {
     --global-base-color                 : #{$background};
     --global-bg-color                   : #{$background};
-    --global-footer-bg-color            : #{$background};
-    --global-border-color               : #{$light-gray};
-    --global-dark-border-color          : #{$background-light};
-    --global-code-background-color      : #fafafa;
-    --global-code-text-color            : #{$darker-gray};
-    --global-fig-caption-color          : #{$light-gray};
+    --global-footer-bg-color            : mix($background, #000, 85%);
+    --global-border-color               : #{$background-light};
+    --global-dark-border-color          : mix($background, $gold, 80%);
+    --global-code-background-color      : mix($background, #000, 90%);
+    --global-code-text-color            : #{$white};
+    --global-fig-caption-color          : #{$light-gray-text};
     --global-link-color                 : #{$link};
-    --global-link-color-hover           : #{$link-dark};
+    --global-link-color-hover           : #{$gold-light};
     --global-link-color-visited         : #{$link-light};
     --global-masthead-link-color        : #{$text};
-    --global-masthead-link-color-hover  : #{$background-light};
+    --global-masthead-link-color-hover  : #{$gold};
     --global-text-color                 : #{$text};
-    --global-text-color-light           : #f3f3f3;
+    --global-text-color-light           : mix($white, $background, 70%);
     --global-thead-color                : #{$background-lighter};
 }

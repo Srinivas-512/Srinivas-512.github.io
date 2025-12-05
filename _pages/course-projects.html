@@ -1,0 +1,67 @@
+---
+layout: single
+title: "Course Projects"
+permalink: /course-projects/
+author_profile: true
+---
+
+{% include base_path %}
+{% include project-styles.html %}
+
+<style>
+  /* Hide all project content by default */
+  .project-content-wrapper .project-content {
+    display: none;
+  }
+  
+  /* Show content when corresponding tab is checked */
+  #tab-higoc:checked ~ .project-content-wrapper #higoc {
+    display: block;
+  }
+  
+  /* Style active tab label when corresponding radio is checked */
+  #tab-higoc:checked ~ .project-tabs label[for="tab-higoc"] {
+    color: var(--global-link-color);
+    border-bottom-color: var(--global-link-color);
+    font-weight: 600;
+  }
+</style>
+
+{% comment %}
+  COURSE PROJECTS PAGE
+  ====================
+  
+  HOW TO ADD A NEW COURSE PROJECT:
+  1. Copy _includes/projects/course-project-template.html
+  2. Rename it (e.g., course-project-1.html)
+  3. Update the content with your project details
+  4. Update the div id in your project file (e.g., id="course-project-1")
+  5. Add a new tab input and label below
+  6. Add CSS selector in the <style> section above
+  7. Include your project file in the project-content-wrapper section
+  
+  EXAMPLE:
+  In <style> section:
+  #tab-course-project-1:checked ~ .project-content-wrapper #course-project-1 {
+    display: block;
+  }
+  
+  In tabs section:
+  <input type="radio" id="tab-course-project-1" name="project-tabs" class="project-tab-input" checked>
+  <label for="tab-course-project-1" class="project-tab-label">Project Name</label>
+  
+  In content wrapper:
+  Use: {% include projects/course-project-1.html %}
+{% endcomment %}
+
+<div class="project-tabs-container">
+  <input type="radio" id="tab-higoc" name="project-tabs" class="project-tab-input" checked>
+  
+  <div class="project-tabs">
+    <label for="tab-higoc" class="project-tab-label">HiGOC</label>
+  </div>
+  
+  <div class="project-content-wrapper">
+    {% include projects/higoc.html %}
+  </div>
+</div>

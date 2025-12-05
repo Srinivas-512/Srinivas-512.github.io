@@ -1,0 +1,74 @@
+{% include base_path %}
+
+<div id="irs" class="project-content">
+  <div class="project-header">
+    <!-- <h2>Phaseless Direction-of-Arrival (DoA) Estimation for 6G — IRS Project</h2> -->
+    <!-- <div class="project-meta">Undergraduate Research Project</div> -->
+  </div>
+  
+  <div class="project-description">
+    <h3>Overview</h3>
+    <p>
+      This undergraduate research project develops a <strong>phaseless DoA estimation</strong> algorithm
+      for Intelligent Reflective Surfaces (IRS) and high-frequency (6G) systems. The method estimates
+      azimuthal arrival using only Received Signal Strength (RSSI) across reconfigurable phased-array
+      beam patterns (no phase measurements), coupling Uniform Linear Arrays (ULA) for symmetric beams
+      with a Uniform Circular Array (UCA) for an asymmetric beam used to resolve sign ambiguity. For a full
+      technical description see the project report.
+    </p>
+
+    <h3>Project Objectives</h3>
+    <ul>
+      <li>Design a reliable DoA estimator using only RSSI from phased arrays (no phase data).</li>
+      <li>Resolve left/right ambiguity using an asymmetric UCA beam and condition the estimator for low-sensitivity regions.</li>
+      <li>Formulate an optimization over array weights to maximize differential-beam slope in low-sensitivity azimuth ranges.</li>
+      <li>Demonstrate algorithmic performance in simulation and prepare for hardware validation.</li>
+    </ul>
+
+    <h3>Methodology</h3>
+    <p>
+      The pipeline uses phased-array beamforming to produce a set of beams (two symmetric ULA beams and one
+      asymmetric UCA beam). For each beam the system measures RSSI (time-averaged magnitude squared of the
+      received signal) and compares RSSI differences with the differential gain expected from array patterns.
+      A least-squares / cost-function search over azimuths finds candidate angles; the UCA asymmetric beam
+      disambiguates the two symmetric solutions. When the predicted angle falls in a low-sensitivity central
+      region, the algorithm swaps in an alternative differential beam (UCA + phase-offset ULA) to improve slope
+      and resolution. The full derivation and equations (array factors, cost functions) are in the report.
+    </p>
+
+    <h3>Results & Impact</h3>
+    <p>
+      Simulation results show large improvements from the final version of the estimator:
+    </p>
+    <ul>
+      <li>Final-version average errors (azimuth) by iteration count: <strong>n=10 → 0.0788°</strong>, <strong>n=20 → 0.0751°</strong>,
+          <strong>n=30 → 0.0724°</strong>. These are the tabulated averages reported in the project.</li>
+      <li>Conditioning the algorithm on predicted angle and swapping to a steeper differential beam significantly reduced central-region error (report shows the comparative plots and per-angle error figures; see pages with Figs. 24–29).</li>
+      <li>The approach reduces hardware complexity by removing the need for precise phase measurements — useful for IRS deployments where low-cost sensors are preferred.</li>
+    </ul>
+
+    <h3>Key Contributions</h3>
+    <ol>
+      <li>Developed a robust phaseless DoA algorithm combining ULA and UCA beam patterns and a differential-gain cost function.</li>
+      <li>Introduced a conditioned beam swap to fix the low-sensitivity central region and dramatically lower mean/max errors in simulation.</li>
+      <li>Proposed an optimization formulation to choose array weights that maximize differential-beam slope over a target azimuth range (work in progress).</li>
+    </ol>
+
+    <h3>Technologies & Tools</h3>
+    <p>
+      Simulation and analysis (array factors, beam patterns, RSSI/time averaging, cost surface scans, and plots)
+      were performed as part of the project report. The author and co-author are students at IIT Madras; see their CVs
+      and full report for implementation details and associated projects.
+    </p>
+
+    <h3>Acknowledgments</h3>
+    <p>
+      Supervised by Prof. Uday Khankhoje. Full project report (with figures, beam plots — e.g., Beam 4 and differential plots on
+      page 9 — algorithm pseudocode and tables) is available as PDF.
+    </p>
+  </div>
+  
+  <div class="project-links">
+    <a href="/files/irs-project.pdf" target="_blank">View Project Report (PDF)</a>
+  </div>
+</div>

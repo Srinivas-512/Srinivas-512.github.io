@@ -1,0 +1,186 @@
+{% include base_path %}
+
+<div id="infernet" class="project-content">
+  <div class="project-header">
+    <!-- <h2>InferNet — Next Likely Action Prediction</h2> -->
+    <!-- <div class="project-meta">Developed during Data Scientist Internship at Skan AI (Summer 2024)</div> -->
+  </div>
+  
+  <div class="project-description">
+    <h3>Overview</h3>
+    <p>
+      During my Data Scientist internship at <strong>Skan AI</strong>, I built a fully-interpretable
+      next-activity prediction system using Dynamic Bayesian Networks (DBNs).
+      The goal was to match or beat neural sequence models while keeping
+      full explainability and handling unseen parent–value combinations—a major limitation
+      of existing white-box DBN-based systems.
+    </p>
+
+
+    <h3>Problem Overview</h3>
+    <p>
+      Given the last \(k\) events of a case, InferNet predicts the next activity.
+      For each event slice we use:
+    </p>
+    <ul>
+      <li><code>concept:name</code> (activity)</li>
+      <li><code>org:resource</code> (resource)</li>
+    </ul>
+
+    <p>
+      A DBN models temporal dependencies through a DAG and Conditional Probability Tables (CPTs).
+      The joint factorization is:
+    </p>
+
+    <p>
+      \[
+      P(X_1,\ldots,X_n)
+      = \prod_{i=1}^n P\!\left(X_i \mid \mathrm{Parents}(X_i)\right)
+      \]
+    </p>
+
+    <h3>Methodology</h3>
+
+    <h4>Structure Learning</h4>
+    <p>
+      We learn the DBN structure using greedy add/delete search with the
+      <strong>Categorical Score</strong>.
+      Regularizers such as BIC underfit because BPIC logs are modest-sized.
+    </p>
+
+    <h4>Parameter Estimation (CPTs)</h4>
+    <p>
+      Once the DAG is fixed, CPT rows are filled using frequency counts from the training set.
+      Below is an illustrative CPT from the paper.
+    </p>
+
+    <table class="project-table">
+      <thead>
+        <tr>
+          <th>Parents</th>
+          <th>a</th>
+          <th>b</th>
+          <th>c</th>
+          <th>end</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>(start, resource1)</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr>
+        <tr><td>(start, resource2)</td><td>0.8</td><td>0.1</td><td>0.1</td><td>0.0</td></tr>
+        <tr><td>(a, resource2)</td><td>0.0</td><td>0.6</td><td>0.3</td><td>0.1</td></tr>
+        <tr><td>(a, resource3)</td><td>0.0</td><td>0.4</td><td>0.4</td><td>0.2</td></tr>
+        <tr><td>(b, resource1)</td><td>0.1</td><td>0.0</td><td>0.7</td><td>0.2</td></tr>
+        <tr><td>(b, resource4)</td><td>0.2</td><td>0.0</td><td>0.8</td><td>0.0</td></tr>
+        <tr><td>(c, resource4)</td><td>0.0</td><td>0.2</td><td>0.0</td><td>0.8</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Handling Unseen Parent Combinations</h3>
+
+    <h4>Marginalization</h4>
+    <p>
+      Average over all CPT rows that match the seen parents:
+    </p>
+
+    <p>
+      \[
+      P(A \mid X_s)
+      = \frac{1}{N}
+        \sum_{v_u \in V(Parents_u)}
+        P(A \mid X_s, v_u)
+      \]
+    </p>
+
+    <p>Simple but loses useful partial-match information.</p>
+
+    <h4>Naïve Bayes</h4>
+    <p>Assumes parent independence:</p>
+
+    <p>
+      \[
+      P(A \mid v_1,\ldots,v_n)
+      = \frac{\prod_{i=1}^n P(A \mid v_i)}
+             {\sum_{a' \in \mathcal{A}}
+             \prod_{i=1}^n P(a' \mid v_i)}
+      \]
+    </p>
+
+    <p>Fails because attributes are strongly correlated in real logs.</p>
+
+    <h4>Score-Based Marginalization (SM) — our method</h4>
+    <p>
+      SM uses DBN edges to weight partial matches.  
+      For each partial evidence \(E\):
+    </p>
+
+    <p>
+      \[
+      S(E) =
+      \sum_{\hat p \in O_E}
+      \text{edge\_score}(\hat p \rightarrow c)
+      \]
+    </p>
+
+    <p>
+      Posterior estimate:
+    </p>
+
+    <p>
+      \[
+      P(A \mid E_u)
+      = \sum_{E \in \mathcal{E}}
+        \frac{S(E)}{\sum_{E' \in \mathcal{E}} S(E')}
+        \, P(A \mid E)
+      \]
+    </p>
+
+    <p>
+      SM retains interpretability while significantly improving unseen-evidence accuracy.
+    </p>
+
+    <h3>Key Results</h3>
+
+    <h4>BPIC-2015 (selected)</h4>
+    <table class="project-table">
+      <thead>
+        <tr><th>Method</th><th>Avg Acc (k=5)</th><th>Avg Acc (k=10)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>InferNet (SM)</td><td>~58.1%</td><td>~56.2%</td></tr>
+        <tr><td>Best neural baseline</td><td>~60.3%</td><td>~53.8%</td></tr>
+        <tr><td>Pauwels (white-box)</td><td>~53.5%</td><td>~51.5%</td></tr>
+      </tbody>
+    </table>
+
+    <h4>BPIC-20 (selected)</h4>
+    <table class="project-table">
+      <thead>
+        <tr><th>Method</th><th>k=5</th><th>k=10</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>InferNet (SM)</td><td>~90.1%</td><td>~88.8%</td></tr>
+        <tr><td>Best black-box</td><td>~89.0%</td><td>~89.1%</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Across all datasets, Score-Based Marginalization retains performance even as unseen-context percentages increase (see paper Figures 3 and 4).
+    </p>
+
+    <h3>Takeaways</h3>
+    <ul>
+      <li><strong>Interpretability:</strong> DBN edges directly show temporal causation.</li>
+      <li><strong>SM handles unseen data:</strong> prioritized partial matches based on structural importance.</li>
+      <li><strong>Competitive:</strong> Matches or beats black-box baselines on multiple BPIC logs.</li>
+    </ul>
+
+    <h3>References</h3>
+    <p>
+      Paper: <em>InferNet: Next Likely Action Prediction in Business Processes</em>, ICSOC 2024.
+    </p>
+  </div>
+  
+  <div class="project-links">
+    <a href="/files/infernet.pdf" target="_blank">View Paper (PDF)</a>
+  </div>
+</div>

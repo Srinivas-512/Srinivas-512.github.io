@@ -72,7 +72,7 @@ files/                              # Place PDFs and documents here
      ```
    - Include your project file:
      ```html
-     {% include projects/course-project-1.html %}
+     {% raw %}{% include projects/course-project-1.html %}{% endraw %}
      ```
 
 ## 📸 Adding Images
@@ -190,7 +190,7 @@ Each project template includes these sections:
    
    <div class="project-content-wrapper">
      <!-- Add with other includes -->
-     {% include projects/ml-course-project.html %}
+     {% raw %}{% include projects/ml-course-project.html %}{% endraw %}
    </div>
    ```
 
